@@ -1,0 +1,63 @@
+# exemple de fichier de configuration à fournir au script 3_create_datasets.py
+
+
+#chemin des .tif contennant les images mensuelles
+#toutes les images doivent être alignées (même format, même crs, même transformation)
+#on peut ajouter n'importe quelle bande à ce fichier. Les bandes spécifiées dans cet exemple sont celles nécessaires pour calculer les indices optiques, le rapport s1vv/s1vh et le mnh.
+#Les noms des bandes dans les df exportés seront les noms des fichiers fournis et non les noms des clés de ce fichier de configuration
+  #exemple : 
+    # b2:"cheminvers/S2_B2.tif" aura comme nom S2_B2 et non b2
+mensual_imgs_fps:
+  #bandes nécessaires
+  b2: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B2.tif"
+  b3: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B3.tif"
+  b4: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B4.tif"
+  b8: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B8.tif"
+  b11: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B11.tif"
+  b12: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B12.tif"
+
+  #les bandes s1 doivent être founies en dB. Le script calcule s1vv-s1vh pour obtenir le rapport vv/vh.
+  s1vv_a: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/S1_mensuel/A_VV_mensuel_db.tif"
+  s1vh_a: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/S1_mensuel/A_VH_mensuel_db.tif"
+  s1vv_d: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/S1_mensuel/D_VV_mensuel_db.tif"
+  s1vh_d: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/S1_mensuel/D_VH_mensuel_db.tif"
+
+  #bandes optionnelles
+  b5: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B5.tif"
+  b6: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B6.tif"
+  b7: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B7.tif"
+  b8a: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B8A.tif"
+
+  landsat: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/LST/landsat_lst_medianes_saisonnieres.tif"
+
+#chemin des .tifs contennant les images annuelles
+#toutes les précisions pour les images mensuelles sont valables pour ces images
+annual_imgs_fps:
+  #bandes nécessaires
+  s1vv_a: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/s1_annuel/A_VV_annuel_db.tif"
+  s1vh_a: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/s1_annuel/A_VH_annuel_db.tif"
+  s1vv_d: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/s1_annuel/D_VV_annuel_db.tif"
+  s1vh_d: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/s1_annuel/D_VH_annuel_db.tif"
+  mnt: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/Topo/rge_snapped_to_grid.tif"
+  mns: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/Topo/correll_snapped_to_grid.tif"
+
+  #bandes optionnelles
+  pentes: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/Topo/pente10m.tif"
+  cuvette100: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/Topo/cuvettes/cuvette100m.tif"
+  cuvette500: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/Topo/cuvettes/cuvette500m.tif"
+  cuvette1000: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/Topo/cuvettes/cuvette1000m.tif"
+
+  ecostress: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/LST/ECOSTRESS_amplitude_2019.tif"
+
+#chemin de fichier du dictionnaire python contennant les paramètres du modèle
+#exporté par 2_training.py
+model_dict_fp: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/modeles/modele_lst/model.pkl"
+
+seed: 2019
+
+#chemin de fichier vers un masque binaire au même format que toutes les images où les 1 sont les pixels valides de la grille de référence.
+#(le jeu de vérité terrain ne sera échantilloné que dans la zone valide)
+#si ce champ est laissé vide, toute la grille de référence est utilisée
+valid_mask_fp: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/LST/lst_valid_mask.tif"
+
+out_folder: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/modeles/modele_lst"

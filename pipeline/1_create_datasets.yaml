@@ -1,0 +1,82 @@
+# exemple de fichier de configuration à fournir au script 1_create_datasets.py
+
+#chemin de fichier d'un shp contennant des polygones inventoriés zones humides
+zh_fp: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees/input/donnees_reference/Inventaire_HG_2016/zones_humides.shp"
+
+#chemin de fichier vers la carto patrinat des zones humides probables non seuillée couvrant la zone d'étude
+#https://www.patrinat.fr/fr/cartographie-nationales-des-milieux-humides-et-des-zones-humides-donnees-regionales-7372
+cnzh_fp: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees/input/donnees_reference/PATRINAT/ZH_prob_Occitanie(1)/ZH_prob_Occitanie.tif"
+
+#chemin des .tif contennant les images mensuelles
+#toutes les images doivent être alignées (même format, même crs, même transformation)
+#on peut ajouter n'importe quelle bande à ce fichier. Les bandes spécifiées dans cet exemple sont celles nécessaires pour calculer les indices optiques, le rapport s1vv/s1vh et le mnh.
+#Les noms des bandes dans les df exportés seront les noms des fichiers fournis et non les noms des clés de ce fichier de configuration
+  #exemple : 
+    # b2:"cheminvers/S2_B2.tif" aura comme nom S2_B2 et non b2
+mensual_imgs_fps:
+  #bandes nécessaires
+  b2: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B2.tif"
+  b3: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B3.tif"
+  b4: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B4.tif"
+  b8: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B8.tif"
+  b11: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B11.tif"
+  b12: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B12.tif"
+
+  #les bandes s1 doivent être founies en dB. Le script calcule s1vv-s1vh pour obtenir le rapport vv/vh.
+  s1vv_a: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/S1_mensuel/A_VV_mensuel_db.tif"
+  s1vh_a: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/S1_mensuel/A_VH_mensuel_db.tif"
+  s1vv_d: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/S1_mensuel/D_VV_mensuel_db.tif"
+  s1vh_d: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/S1_mensuel/D_VH_mensuel_db.tif"
+
+  #bandes optionnelles
+  b5: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B5.tif"
+  b6: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B6.tif"
+  b7: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B7.tif"
+  b8a: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S2/B8A.tif"
+
+  landsat: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/LST/landsat_lst_medianes_saisonnieres.tif"
+
+#chemin des .tifs contennant les images annuelles
+#toutes les précisions pour les images mensuelles sont valables pour ces images
+annual_imgs_fps:
+  #bandes nécessaires
+  s1vv_a: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/s1_annuel/A_VV_annuel_db.tif"
+  s1vh_a: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/s1_annuel/A_VH_annuel_db.tif"
+  s1vv_d: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/s1_annuel/D_VV_annuel_db.tif"
+  s1vh_d: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/S1/s1_annuel/D_VH_annuel_db.tif"
+  mnt: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/Topo/rge_snapped_to_grid.tif"
+  mns: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/Topo/correll_snapped_to_grid.tif"
+
+  #bandes optionnelles
+  pentes: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/Topo/pente10m.tif"
+  cuvette100: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/Topo/cuvettes/cuvette100m.tif"
+  cuvette500: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/Topo/cuvettes/cuvette500m.tif"
+  cuvette1000: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/Topo/cuvettes/cuvette1000m.tif"
+
+  ecostress: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/LST/ECOSTRESS_amplitude_2019.tif"
+
+#informations de connection à une base de données pgsql contennant une couche appelée bdtopo_mask utilisée pour filtrer l'inventaire de terrain
+#le script utilisé pour produire un tel masque à partir de la BD TOPO de l'IGN est le script 0_bdtopo_mask.sql
+pgsql: 
+  db: "shrek"
+  user: postgres
+  password: postgres
+  host: localhost
+  port: 5434
+
+
+#taille de l'échantillon positif
+zh_size: 150000
+
+#taille de l'échantillon négatif
+znh_size: 150000
+
+seed: 2019
+
+#chemin de fichier vers un masque binaire au même format que toutes les images où les 1 sont les pixels valides de la grille de référence.
+#(le jeu de vérité terrain ne sera échantilloné que dans la zone valide)
+#si ce champ est laissé vide, toute la grille de référence est utilisée
+valid_mask_fp: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/LST/lst_valid_mask.tif"
+
+#dossier pour exporter les individus zones humides et non zones humides
+out_folder: "/mnt/Data/30_Stages_Encours/2026/2026_SHREQ_Niels/02_Donnees_propres/modeles/modele_lst"
