@@ -1,6 +1,48 @@
-# Stage SHREQ
-Ce dépôt contient les codes du modèle développé pendant le stage SHREQ d'Avril 2026 à Septembre 2026 au groupe OSECC du Cerema Occitanie.  
-Ce stage visait à améliorer et adapter à la Haute-Garonne la méthode REAUZOH.  
+# Stage Cartographie des zones humides potentielles par random forest à partir d'images satellitaires
+L’inventoriage des zones humides sur le terrain est un processus long et coûteux. Il en résulte que les
+inventaires sont inégalement disponibles selon les régions et souvent datés. Il existe une Cartographie Nationale des Zones Humides (CNZH), réalisée par l’institut PatriNat, issue d’une classification
+par random forest à partir de variables hydrologiques, topographiques et géologiques. Cependant, le choix
+de ces variables ne permet pas de suivi inter-annuel, ni de détection des zones humides artificialisées ou
+drainées.  
+
+La <a href="https://www.cerema.fr/fr/actualites/reauzoh-intelligence-artificielle-au-service-cartographie">méthode REAUZOH</a>, développée par le Cerema, pallie ces limites par l’intégration d’images satellites optiques (Sentinel-2) et SAR (Sentinel-1). Cette méthode nécessite toutefois un jeu de vérité terrain réalisé in situ par des experts, ce qui en limite la reproductibilité. Elle a également été mise au point sur une communauté de commune de petite superficie.  
+
+Nous avons adapté cette méthode au département de la Haute-Garonne et à l’absence de jeu de vérité
+terrain ad hoc. Nos contributions principales à cette méthode sont : (i) modification de la méthode de
+constitution du jeu de données, en utilisant un inventaire publique et en constituant un jeu de vérité
+terrain négatif à partir de la CNZH ; (ii) affinage du jeu de données positif pour tenir compte de la variabilité saisonnière des zones humides ; (iii) implémentation d’une étape d’extraction des caractéristiques
+des variables d’entrée par Analyse en Composante Principale ; (iv) amélioration de l’optimisation des
+hyperparamètres du random forest par l’algorithme Tree-Structured Parzen Estimator. Notre méthode
+montre de bons résultats sur le jeu de données global (f1-score moyen de 84%, ROC-AUC de 0.93) mais
+sur-évalue la présence de zones humides dans les zones boisées (rappel de 64% des non zones humides de
+fort NDVI).  
+
+Nous présentons également une étude de l’apport marginal à cette méthode des produits de température de surface (TS) Landsat et ECOSTRESS et des images du satellite NISAR (images SAR de bande L
+en polarisation horizontale). Nous avons extrait des médianes saisonnières des TS des satellites Landsat
+et une image d’amplitude thermique journalière des TS du capteur ECOSTRESS. Nous avons utilisé les
+images NISAR de rétrodiffusion et de cohérence de phase entre deux acquisitions. Notre étude ne montre
+pas d’amélioration significative de la classification en ajoutant les images de TS (f1-score moyen de 81.4
+± 0.1% contre 81.4 ± 0.2% pour la méthode témoin) et une légère amélioration en ajoutant les images
+NISAR (f1-score moyen de 79.7 ± 0.2% contre 79.3 ± 0.2% pour la méthode témoin).  
+
+Pour un rapport méthodologique détaillé de ce stage, voir le fichier [rapport_methodologique.pdf](rapport_methodologique.pdf) de ce dépôt.  
+
+<p align="center">
+  <img src="carte_zh_haute_garonne.png" alt="Carte des zones humides potentielles de Haute-Garonne" width="600">
+  <br>
+  <em>Carte des zones humides potentielles de Haute-Garonne</em>
+</p>
+
+## Structure du dépôt
+```text
+.
+├───lib        # contient shreklib.py qui inclue des fonctions mineures utilisées dans différents scripts
+├───pipeline        # dossier contenant les scripts .py de la chaîne de production de la cartographie des zones humides potentielles
+└───pre_traitement_donnees      # dossier contenant des jupyter notebooks utilisés pour le pré-traitement des images fournies en entrée du modèle
+   ├───LST_landsat
+   ├───S1
+   └───topo
+```
   
 # Installation
 le fichier /requirements.txt contient les librairies python utilisée pour le développement des scripts python de ce dépôt.  
@@ -79,13 +121,3 @@ Il prend en entrée le chemin vers un fichier de configuration .yaml. Le format 
 ### exécution :
 Pour exécuter ce fichier, il faut se placer dans un environnement python vérifiant les dépendances nécessaires (cf requirements.txt) et dans le dossier /pipeline dans un terminal de commande et exécuter :  
 python 3_inference.py /chemin/du/fichier/de/config.yaml
-
-
-## Structure du dépôt
-.
-├───lib        # contient shreklib.py qui inclue des fonctions mineures utilisées dans différents scripts
-├───pipeline        # dossier contenant les scripts .py de la chaîne de production de la cartographie des zones humides potentielles
-└───pre_traitement_donnees      # dossier contenant des jupyter notebooks utilisés pour le pré-traitement des images fournies en entrée du modèle
-   ├───LST_landsat
-   ├───S1
-   └───topo
