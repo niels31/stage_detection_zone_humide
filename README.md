@@ -25,6 +25,7 @@ pas d’amélioration significative de la classification en ajoutant les images 
 ± 0.1% contre 81.4 ± 0.2% pour la méthode témoin) et une légère amélioration en ajoutant les images
 NISAR (f1-score moyen de 79.7 ± 0.2% contre 79.3 ± 0.2% pour la méthode témoin).  
 
+Consulter les [supports de la soutenance](supports_soutenance.pdf) de ce stage pour une présentation des principaux traitements et résultats.
 Pour un rapport méthodologique détaillé de ce stage, voir le fichier [rapport_methodologique.pdf](rapport_methodologique.pdf) de ce dépôt.  
 
 <p align="center">
